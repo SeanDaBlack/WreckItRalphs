@@ -309,7 +309,7 @@ def fill_out_application_and_submit(driver, random_city, fake_identity, ap):
 
 
     print(ap)
-    requests.post("https://change-is-brewing.herokuapp.com/applications", headers={"app_type":"ralphs"})
+    requests.post("https://change-is-brewing.herokuapp.com/ralphs")
     # take out the trash
     os.remove(resume_filename+'.pdf')
 
