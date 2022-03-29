@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from WreckItRalphs.constants.parser import CLOUD_DISABLED, CLOUD_ENABLED
 from resume_faker import make_resume
 from pdf2image import convert_from_path
 
@@ -52,16 +53,17 @@ args = parser.parse_args()
 
 def start_driver(random_city):
     options = Options()
-    if (args.cloud == CLOUD_DISABLED):
-        options.add_argument(f"user-agent={USER_AGENT}")
+    if (args.cloud == CLOUD_ENABLED):
+        #options.add_argument(f"user-agent={USER_AGENT}")
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('disable-blink-features=AutomationControlled')
-        options.headless = True
+        #options.add_argument('disable-blink-features=AutomationControlled')
+        #options.headless = True
+        driver = webdriver.Chrome('chromedriver',options=options)
         driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
-        driver.set_window_size(1440, 900)
-    elif (args.cloud == CLOUD_ENABLED):
+        #driver.set_window_size(1440, 900)
+    elif (args.cloud == CLOUD_DISABLED):
         driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(CITIES_TO_URLS[random_city])
     driver.implicitly_wait(10)
@@ -353,7 +355,8 @@ def main():
         try:
             driver = start_driver(random_city)
         except Exception as e:
-            printf(f"FAILED TO START DRIVER: {e}")
+            if not args.cloud:
+                printf(f"FAILED TO START DRIVER: {e}")
             pass
 
         time.sleep(2)
