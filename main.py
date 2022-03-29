@@ -15,7 +15,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from WreckItRalphs.constants.parser import CLOUD_DISABLED, CLOUD_ENABLED
+from constants.parser import CLOUD_DISABLED, CLOUD_ENABLED
 from resume_faker import make_resume
 from pdf2image import convert_from_path
 
@@ -61,7 +61,7 @@ def start_driver(random_city):
         #options.add_argument('disable-blink-features=AutomationControlled')
         #options.headless = True
         driver = webdriver.Chrome('chromedriver',options=options)
-        driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+        #driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
         #driver.set_window_size(1440, 900)
     elif (args.cloud == CLOUD_DISABLED):
         driver = webdriver.Chrome(ChromeDriverManager().install())
