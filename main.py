@@ -17,7 +17,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from constants.parser import CLOUD_DISABLED, CLOUD_ENABLED
 from resume_faker import make_resume
-from pdf2image import convert_from_path
 
 from webdriver_manager.chrome import ChromeDriverManager
 os.environ['WDM_LOG_LEVEL'] = '0'
